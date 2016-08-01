@@ -36,6 +36,12 @@ class PhotoMapViewController: UIViewController {
         }
         self.presentViewController(vc, animated: true, completion: nil)
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        let locationView = segue.destinationViewController as! LocationsViewController
+        locationView.delegate = self
+    }
 }
 
 extension PhotoMapViewController: UINavigationControllerDelegate {
@@ -50,11 +56,19 @@ extension PhotoMapViewController: UIImagePickerControllerDelegate {
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
         // Do something with the images (based on your use case)
-        choosenImage = originalImage
+        choosenImage = editedImage
         
         // Dismiss UIImagePickerController to go back to your original view controller
         dismissViewControllerAnimated(true) { 
             self.performSegueWithIdentifier("tagSegue", sender: nil)
         }
+    }
+}
+
+extension PhotoMapViewController: LocationsViewControllerDelegate {
+
+    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {
+        
+        self.navigationController?.popToViewController(self, animated: true)
     }
 }
