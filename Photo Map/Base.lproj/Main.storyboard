@@ -21,17 +21,21 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="lbX-f9-EzN">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                             </mapView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="fzN-Yt-bPe">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sYg-i9-aQQ">
                                 <rect key="frame" x="128" y="484" width="64" height="64"/>
-                            </imageView>
+                                <state key="normal" image="camera"/>
+                                <connections>
+                                    <action selector="tapCamera:" destination="ghP-Ww-KKQ" eventType="touchUpInside" id="aqE-5i-nC2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lbX-f9-EzN" firstAttribute="top" secondItem="vrG-Wc-0bn" secondAttribute="bottom" id="Dbv-ub-vPA"/>
-                            <constraint firstItem="fzN-Yt-bPe" firstAttribute="centerX" secondItem="Lxe-6f-KEH" secondAttribute="centerX" id="KFh-bP-eIK"/>
+                            <constraint firstItem="sYg-i9-aQQ" firstAttribute="centerX" secondItem="Lxe-6f-KEH" secondAttribute="centerX" id="j3T-Mv-lfj"/>
                             <constraint firstItem="ufw-e1-uLx" firstAttribute="top" secondItem="lbX-f9-EzN" secondAttribute="bottom" id="k0W-Bl-Vvc"/>
+                            <constraint firstItem="ufw-e1-uLx" firstAttribute="top" secondItem="sYg-i9-aQQ" secondAttribute="bottom" constant="20" id="nW0-wa-M5I"/>
                             <constraint firstAttribute="trailing" secondItem="lbX-f9-EzN" secondAttribute="trailing" id="obx-Za-WYd"/>
-                            <constraint firstItem="ufw-e1-uLx" firstAttribute="top" secondItem="fzN-Yt-bPe" secondAttribute="bottom" constant="20" id="sFC-PK-vHz"/>
                             <constraint firstItem="lbX-f9-EzN" firstAttribute="leading" secondItem="Lxe-6f-KEH" secondAttribute="leading" id="uET-9x-Rg2"/>
                         </constraints>
                     </view>

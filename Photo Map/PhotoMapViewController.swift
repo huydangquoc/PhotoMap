@@ -13,6 +13,8 @@ class PhotoMapViewController: UIViewController {
 
     @IBOutlet weak var mapKitView: MKMapView!
     
+    var choosenImage: UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,21 +23,38 @@ class PhotoMapViewController: UIViewController {
                                               MKCoordinateSpanMake(0.1, 0.1))
         mapKitView.setRegion(sfRegion, animated: false)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func tapCamera(sender: AnyObject) {
+        
+        let vc = UIImagePickerController()
+        vc.delegate = self
+        vc.allowsEditing = true
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            vc.sourceType = UIImagePickerControllerSourceType.Camera
+        } else {
+            vc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        }
+        self.presentViewController(vc, animated: true, completion: nil)
     }
-    */
+}
 
+extension PhotoMapViewController: UINavigationControllerDelegate {
+}
+
+extension PhotoMapViewController: UIImagePickerControllerDelegate {
+    
+    func imagePickerController(picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        // Get the image captured by the UIImagePickerController
+        let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        
+        // Do something with the images (based on your use case)
+        choosenImage = originalImage
+        
+        // Dismiss UIImagePickerController to go back to your original view controller
+        dismissViewControllerAnimated(true) { 
+            self.performSegueWithIdentifier("tagSegue", sender: nil)
+        }
+    }
 }
