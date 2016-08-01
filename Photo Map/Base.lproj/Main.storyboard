@@ -17,10 +17,27 @@
                     <view key="view" contentMode="scaleToFill" id="Lxe-6f-KEH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="lbX-f9-EzN">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            </mapView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="fzN-Yt-bPe">
+                                <rect key="frame" x="128" y="484" width="64" height="64"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lbX-f9-EzN" firstAttribute="top" secondItem="vrG-Wc-0bn" secondAttribute="bottom" id="Dbv-ub-vPA"/>
+                            <constraint firstItem="fzN-Yt-bPe" firstAttribute="centerX" secondItem="Lxe-6f-KEH" secondAttribute="centerX" id="KFh-bP-eIK"/>
+                            <constraint firstItem="ufw-e1-uLx" firstAttribute="top" secondItem="lbX-f9-EzN" secondAttribute="bottom" id="k0W-Bl-Vvc"/>
+                            <constraint firstAttribute="trailing" secondItem="lbX-f9-EzN" secondAttribute="trailing" id="obx-Za-WYd"/>
+                            <constraint firstItem="ufw-e1-uLx" firstAttribute="top" secondItem="fzN-Yt-bPe" secondAttribute="bottom" constant="20" id="sFC-PK-vHz"/>
+                            <constraint firstItem="lbX-f9-EzN" firstAttribute="leading" secondItem="Lxe-6f-KEH" secondAttribute="leading" id="uET-9x-Rg2"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aPF-0T-Ydb"/>
                     <connections>
+                        <outlet property="mapKitView" destination="lbX-f9-EzN" id="iat-X8-7IY"/>
                         <segue destination="eZf-Nb-6PU" kind="push" identifier="tagSegue" id="Tzv-N2-17x"/>
                         <segue destination="WeT-38-qba" kind="push" identifier="fullImageSegue" id="B5X-dM-HfZ"/>
                     </connections>
@@ -154,4 +171,7 @@
             <point key="canvasLocation" x="109" y="-3"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera" width="64" height="64"/>
+    </resources>
 </document>

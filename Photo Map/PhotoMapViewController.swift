@@ -7,13 +7,19 @@
 //
 
 import UIKit
+import MapKit
 
 class PhotoMapViewController: UIViewController {
 
+    @IBOutlet weak var mapKitView: MKMapView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        //one degree of latitude is approximately 111 kilometers (69 miles) at all times.
+        let sfRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake(37.783333, -122.416667),
+                                              MKCoordinateSpanMake(0.1, 0.1))
+        mapKitView.setRegion(sfRegion, animated: false)
     }
 
     override func didReceiveMemoryWarning() {

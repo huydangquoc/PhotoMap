@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		11D16EF31BD08AAE00B6CBFE /* PhotoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D16EF21BD08AAE00B6CBFE /* PhotoMapViewController.swift */; };
 		11D16EF51BD08ABE00B6CBFE /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D16EF41BD08ABE00B6CBFE /* FullImageViewController.swift */; };
 		228D474F19F5DA9F00DE9903 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D474E19F5DA9F00DE9903 /* AppDelegate.swift */; };
 		228D475419F5DA9F00DE9903 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228D475219F5DA9F00DE9903 /* Main.storyboard */; };
@@ -17,6 +16,8 @@
 		228D477019F5DAFF00DE9903 /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D476F19F5DAFF00DE9903 /* LocationsViewController.swift */; };
 		22BB9BD519F5DD21000048C2 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB9BD419F5DD21000048C2 /* LocationCell.swift */; };
 		3C6247FD4BEC31ACCCC2FC2C /* Pods_Photo_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3117F880EF770C73BC267319 /* Pods_Photo_Map.framework */; };
+		6BA3EB721D4F78F300553045 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA3EB711D4F78F300553045 /* MapKit.framework */; };
+		6BA3EB741D4F7B5300553045 /* PhotoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA3EB731D4F7B5300553045 /* PhotoMapViewController.swift */; };
 		BB069E2DA6E7EB3F213CB727 /* Pods_Photo_MapTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A38C90C18B8FBC28626F632B /* Pods_Photo_MapTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,7 +32,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		11D16EF21BD08AAE00B6CBFE /* PhotoMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoMapViewController.swift; sourceTree = "<group>"; };
 		11D16EF41BD08ABE00B6CBFE /* FullImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
 		12B190D8026AA9DA033871B1 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2258D28219F5E60100F013CE /* Photo Map-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Photo Map-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -47,6 +47,8 @@
 		228D476F19F5DAFF00DE9903 /* LocationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
 		22BB9BD419F5DD21000048C2 /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		3117F880EF770C73BC267319 /* Pods_Photo_Map.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Photo_Map.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BA3EB711D4F78F300553045 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6BA3EB731D4F7B5300553045 /* PhotoMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoMapViewController.swift; sourceTree = "<group>"; };
 		7A90FC7BD32DCA37BAE699BE /* Pods-Photo Map.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photo Map.release.xcconfig"; path = "Pods/Target Support Files/Pods-Photo Map/Pods-Photo Map.release.xcconfig"; sourceTree = "<group>"; };
 		86106796CA5AA9F8DD26455C /* Pods-Photo MapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photo MapTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Photo MapTests/Pods-Photo MapTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A38C90C18B8FBC28626F632B /* Pods_Photo_MapTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Photo_MapTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BA3EB721D4F78F300553045 /* MapKit.framework in Frameworks */,
 				3C6247FD4BEC31ACCCC2FC2C /* Pods_Photo_Map.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,8 +140,8 @@
 		228D476E19F5DAA800DE9903 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6BA3EB731D4F7B5300553045 /* PhotoMapViewController.swift */,
 				228D476F19F5DAFF00DE9903 /* LocationsViewController.swift */,
-				11D16EF21BD08AAE00B6CBFE /* PhotoMapViewController.swift */,
 				11D16EF41BD08ABE00B6CBFE /* FullImageViewController.swift */,
 			);
 			name = "View Controllers";
@@ -166,6 +169,7 @@
 		C53175EB32E8EEC8585BFFB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6BA3EB711D4F78F300553045 /* MapKit.framework */,
 				12B190D8026AA9DA033871B1 /* Pods.framework */,
 				3117F880EF770C73BC267319 /* Pods_Photo_Map.framework */,
 				A38C90C18B8FBC28626F632B /* Pods_Photo_MapTests.framework */,
@@ -374,10 +378,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BA3EB741D4F7B5300553045 /* PhotoMapViewController.swift in Sources */,
 				11D16EF51BD08ABE00B6CBFE /* FullImageViewController.swift in Sources */,
 				22BB9BD519F5DD21000048C2 /* LocationCell.swift in Sources */,
 				228D474F19F5DA9F00DE9903 /* AppDelegate.swift in Sources */,
-				11D16EF31BD08AAE00B6CBFE /* PhotoMapViewController.swift in Sources */,
 				228D477019F5DAFF00DE9903 /* LocationsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
