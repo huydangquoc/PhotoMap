@@ -14,6 +14,7 @@ class PhotoMapViewController: UIViewController {
     @IBOutlet weak var mapKitView: MKMapView!
     
     var choosenImage: UIImage?
+    var fullScreenImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +41,13 @@ class PhotoMapViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        let locationView = segue.destinationViewController as! LocationsViewController
-        locationView.delegate = self
+        if segue.identifier == "tagSegue" {
+            let locationView = segue.destinationViewController as! LocationsViewController
+            locationView.delegate = self
+        } else if segue.identifier == "fullImageSegue" {
+            let fullImageViewController = segue.destinationViewController as! FullImageViewController
+            fullImageViewController.image = choosenImage
+        }
     }
 }
 
@@ -70,7 +76,6 @@ extension PhotoMapViewController: LocationsViewControllerDelegate {
 
     func locationsPickedLocation(controller: LocationsViewController, venue: Venue) {
         
-//        let annotation = MKPointAnnotation()
         let annotation = PhotoAnnotation()
         let imageLocation = CLLocationCoordinate2DMake(CLLocationDegrees(venue.latitude!),
                                                        CLLocationDegrees(venue.longtitude!))
@@ -86,13 +91,14 @@ extension PhotoMapViewController: LocationsViewControllerDelegate {
 extension PhotoMapViewController: MKMapViewDelegate {
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        let reuseID = "myAnnotationView"
         
+        let reuseID = "myAnnotationView"
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseID)
         if (annotationView == nil) {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
             annotationView!.canShowCallout = true
             annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
+            annotationView!.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure)
         }
         
         let resizeRenderImageView = UIImageView(frame: CGRectMake(0, 0, 45, 45))
@@ -110,5 +116,13 @@ extension PhotoMapViewController: MKMapViewDelegate {
         imageView.image = thumbnail
         
         return annotationView
+    }
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if control is UIButton {
+            fullScreenImage = (view.annotation as! PhotoAnnotation).photo
+            self.performSegueWithIdentifier("fullImageSegue", sender: nil)
+        }
     }
 }
