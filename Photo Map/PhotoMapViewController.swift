@@ -70,11 +70,13 @@ extension PhotoMapViewController: LocationsViewControllerDelegate {
 
     func locationsPickedLocation(controller: LocationsViewController, venue: Venue) {
         
-        let annotation = MKPointAnnotation()
+//        let annotation = MKPointAnnotation()
+        let annotation = PhotoAnnotation()
         let imageLocation = CLLocationCoordinate2DMake(CLLocationDegrees(venue.latitude!),
                                                        CLLocationDegrees(venue.longtitude!))
         annotation.coordinate = imageLocation
         annotation.title = venue.name
+        annotation.photo = choosenImage
         mapKitView.addAnnotation(annotation)
         mapKitView.centerCoordinate = imageLocation
         self.navigationController?.popToViewController(self, animated: true)
@@ -93,8 +95,19 @@ extension PhotoMapViewController: MKMapViewDelegate {
             annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
         }
         
+        let resizeRenderImageView = UIImageView(frame: CGRectMake(0, 0, 45, 45))
+        resizeRenderImageView.layer.borderColor = UIColor.whiteColor().CGColor
+        resizeRenderImageView.layer.borderWidth = 3.0
+        resizeRenderImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        resizeRenderImageView.image = (annotation as? PhotoAnnotation)?.photo
+        
+        UIGraphicsBeginImageContext(resizeRenderImageView.frame.size)
+        resizeRenderImageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let thumbnail = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
         let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
-        imageView.image = choosenImage //UIImage(named: "camera")
+        imageView.image = thumbnail
         
         return annotationView
     }
