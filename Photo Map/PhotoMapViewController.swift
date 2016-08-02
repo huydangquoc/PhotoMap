@@ -53,7 +53,7 @@ extension PhotoMapViewController: UIImagePickerControllerDelegate {
     func imagePickerController(picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         // Get the image captured by the UIImagePickerController
-        let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        //let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
         // Do something with the images (based on your use case)
@@ -68,12 +68,15 @@ extension PhotoMapViewController: UIImagePickerControllerDelegate {
 
 extension PhotoMapViewController: LocationsViewControllerDelegate {
 
-    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {
+    func locationsPickedLocation(controller: LocationsViewController, venue: Venue) {
         
         let annotation = MKPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(latitude), CLLocationDegrees(longitude))
-        annotation.title = "Picture!"
+        let imageLocation = CLLocationCoordinate2DMake(CLLocationDegrees(venue.latitude!),
+                                                       CLLocationDegrees(venue.longtitude!))
+        annotation.coordinate = imageLocation
+        annotation.title = venue.name
         mapKitView.addAnnotation(annotation)
+        mapKitView.centerCoordinate = imageLocation
         self.navigationController?.popToViewController(self, animated: true)
     }
 }

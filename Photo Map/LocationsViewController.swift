@@ -10,7 +10,7 @@ import UIKit
 
 // Protocol definition - top of LocationsViewController.swift
 protocol LocationsViewControllerDelegate : class {
-    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber)
+    func locationsPickedLocation(controller: LocationsViewController, venue: Venue)
 }
 
 class LocationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
@@ -23,7 +23,7 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var searchBar: UISearchBar!
 
     weak var delegate : LocationsViewControllerDelegate!
-    var results: NSArray = []
+    var results = [Venue]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,22 +45,15 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("LocationCell") as! LocationCell
         
-        cell.location = results[indexPath.row] as! NSDictionary
+        cell.location = results[indexPath.row].rawData
         
         return cell
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // This is the selected venue
-        let venue = results[indexPath.row] as! NSDictionary
-
-        let lat = venue.valueForKeyPath("location.lat") as! NSNumber
-        let lng = venue.valueForKeyPath("location.lng") as! NSNumber
-        delegate.locationsPickedLocation(self, latitude: lat, longitude: lng)
-
-        let latString = "\(lat)"
-        let lngString = "\(lng)"
-        print(latString + " " + lngString)
+        let venue = results[indexPath.row]
+        delegate.locationsPickedLocation(self, venue: venue)
     }
     
     func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
@@ -92,14 +85,18 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
                 if let data = dataOrNil {
                     if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
                         data, options:[]) as? NSDictionary {
-                            NSLog("response: \(responseDictionary)")
-                            self.results = responseDictionary.valueForKeyPath("response.venues") as! NSArray
-                            self.tableView.reloadData()
-
+                        if let venues = responseDictionary.valueForKeyPath("response.venues") as? NSArray {
+                            self.results.removeAll()
+                            for venue in venues {
+                                if let venue = venue as? NSDictionary {
+                                    self.results.append(Venue(dictionary: venue))
+                                }
+                            }
+                        }
+                        self.tableView.reloadData()
                     }
                 }
         });
         task.resume()
     }
-
 }
